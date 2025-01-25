@@ -71,7 +71,7 @@ function handleProfilFormSubmit(evt) {
 
 // функция окно для создания карточек
 
-function handleProfilFormSubmit(evt) {
+function handleCardFormSubmit(evt) {
 
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     
@@ -121,7 +121,7 @@ buttonProfileAdd.addEventListener('click', function() {
 });
 
 
-popupNewCard.addEventListener('submit', )
+popupNewCard.addEventListener('submit', handleCardFormSubmit);
 
 
 
