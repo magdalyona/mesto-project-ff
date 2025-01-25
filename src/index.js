@@ -81,7 +81,7 @@ function handleCardFormSubmit(evt) {
     };
 
     addCards(newForms, true);
-    popupNewCard.requestFullscreen();
+    popupNewCard.reset();
     closeModal(popupNewCardType)
 
 }
@@ -117,7 +117,7 @@ popupCloseImg.addEventListener('click', handlePopupCloseButton);
 popupProfileEdit.addEventListener('submit', handleProfilFormSubmit);
 
 buttonProfileAdd.addEventListener('click', function() {
-
+    openModal(popupNewCardType)
 });
 
 
