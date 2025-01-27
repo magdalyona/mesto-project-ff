@@ -1,9 +1,9 @@
 // index.js
 
-import { createCard, likeCard, deleteCard } from '../src/components/card.js'; // удаление и лайки карточек
-import { openModal, closeModal } from '../src/components/modal.js'; // работа модальных окон
-import { initialCards } from '../scripts/cards.js'; // добавьте импорт главного файла стилей
-import '../src/pages/index.css';
+import { createCard, likeCard, deleteCard } from './components/card.js'; // удаление и лайки карточек
+import { openModal, closeModal } from './components/modal.js'; // работа модальных окон
+import { initialCards } from './components/cards.js'; // добавьте импорт главного файла стилей
+import './pages/index.css';
 
 
 // @todo: DOM формы редактирования профиля
@@ -24,7 +24,7 @@ const popupInitName = popupProfileEdit.querySelector('.popup__input_type_name');
 const popupInitDescription = popupProfileEdit.querySelector('.popup__input_type_description');
 
 const popupNewCard = document.querySelector('.popup__form[name="new-place"]');
-const popupInitCard = popupNewCard.querySelector('.popup__input_type_card-nam');
+const popupInitCard = popupNewCard.querySelector('.popup__input_type_card-name');
 const popupInitUrl = popupNewCard.querySelector('.popup__input_type_url');
 
 const popupNewCardType = document.querySelector('.popup_type_new-card');
@@ -35,28 +35,24 @@ const buttonProfileEdit = document.querySelector('.profile__edit-button');
 const buttonProfileAdd = document.querySelector('.profile__add-button');
 
 
- // const userElement = userTemplate.querySelector('.user').cloneNode(true);
+ // const userElement = userTemplate.querySelector('.user').cloneNode(true); вывести карту на страницу
+
 const listElement = document.querySelector('.places__list');
 initialCards.map((placesList) => {
     listElement.append(createCard(placesList, deleteCard, likeCard, openImgPopup));
 })
 
-
 // pедактирование имени и информации о себе
-
 function openModalEditProfile () {
     popupInitName.value = titleProfile.textContent;
     popupInitDescription.value = descriptionProfile.textContent;
     openModal(popupTypeEdit);
 }
 
-// открытие с картинкой
-function openImgPopup(event) {
-    popupImg.setAttribute('src', event.target.src);
-    popupImg.setAttribute('alt', event.target.alt);
-    popupCaptionImg.setAttribute = event.target.alt;
-
-    openModal(popupTypeImg);
+// closed button кнопка
+function handlePopupCloseButton (event) {
+    const closedButton = event.target.closest('.popup');
+    closeModal(closedButton);
 }
 
 function handleProfilFormSubmit(evt) {
@@ -65,19 +61,18 @@ function handleProfilFormSubmit(evt) {
     
     titleProfile.textContent = popupInitName.value;
     descriptionProfile.textContent = popupInitDescription.value;
-    openModal(popupTypeEdit);
+    closeModal(popupTypeEdit);
  
 }
 
 // функция окно для создания карточек
-
-function handleCardFormSubmit(evt) {
+function handleCardAddFormSubmit(evt) {
 
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     
     const newForms = {
         name: popupInitCard.value,
-        about: popupInitUrl.value
+        link: popupInitUrl.value
     };
 
     addCards(newForms, true);
@@ -86,8 +81,7 @@ function handleCardFormSubmit(evt) {
 
 }
 
-// функция дял добавления карточек
-
+// функция для добавления карточек
 function addCards(cardElement, cardsNew) {
 
     if (cardsNew) {
@@ -96,12 +90,14 @@ function addCards(cardElement, cardsNew) {
         listElement.append(createCard(cardElement, deleteCard, likeCard, openImgPopup));
     }
 }
- 
-// closed button кнопка
 
-function handlePopupCloseButton(event) {
-    const closedButton = event.target.closest('.popup');
-    closeModal(closedButton);
+// открытие popul с картинкой
+function openImgPopup (event) {
+    popupImg.setAttribute('src', event.target.src);
+    popupImg.setAttribute('alt', event.target.alt);
+    popupCaptionImg.setAttribute = event.target.alt;
+
+    openModal(popupTypeImg);
 }
 
 
@@ -120,20 +116,7 @@ buttonProfileAdd.addEventListener('click', function() {
     openModal(popupNewCardType)
 });
 
-
-popupNewCard.addEventListener('submit', handleCardFormSubmit);
-
-
-
-
-
-
-
-
-
-
-
-
+popupNewCard.addEventListener('submit', handleCardAddFormSubmit);
 
 
 
