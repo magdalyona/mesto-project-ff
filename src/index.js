@@ -5,6 +5,11 @@ import { openModal, closeModal } from './components/modal.js'; // работа �
 import { initialCards } from './components/cards.js'; // добавьте импорт главного файла стилей
 import './pages/index.css';
 
+const popups = document.querySelectorAll('.popup');
+
+popups.forEach(function(item) {
+    item.classList.add('popup_is-animated');
+});
 
 // @todo: DOM формы редактирования профиля
 
@@ -23,12 +28,15 @@ const popupProfileEdit = document.querySelector('.popup__form[name="edit-profile
 const popupInitName = popupProfileEdit.querySelector('.popup__input_type_name');
 const popupInitDescription = popupProfileEdit.querySelector('.popup__input_type_description');
 
-const popupNewCard = document.querySelector('.popup__form[name="new-place"]');
-const popupInitCard = popupNewCard.querySelector('.popup__input_type_card-name');
-const popupInitUrl = popupNewCard.querySelector('.popup__input_type_url');
+const formNewCard = document.querySelector('.popup__form[name="new-place"]');
+
+const popupInitCard = formNewCard.querySelector('.popup__input_type_card-name');
+const popupInitUrl = formNewCard.querySelector('.popup__input_type_url');
 
 const popupNewCardType = document.querySelector('.popup_type_new-card');
 const popupCloseCard = popupNewCardType.querySelector('.popup__close');
+
+
 
 
 const buttonProfileEdit = document.querySelector('.profile__edit-button');
@@ -76,8 +84,10 @@ function handleCardAddFormSubmit(evt) {
     };
 
     addCards(newForms, true);
-    popupNewCard.reset();
-    closeModal(popupNewCardType)
+
+    formNewCard.reset();
+
+    closeModal(popupNewCardType);
 
 }
 
@@ -100,7 +110,6 @@ function openImgPopup (event) {
     openModal(popupTypeImg);
 }
 
-
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 
@@ -116,9 +125,7 @@ buttonProfileAdd.addEventListener('click', function() {
     openModal(popupNewCardType)
 });
 
-popupNewCard.addEventListener('submit', handleCardAddFormSubmit);
-
-
+formNewCard.addEventListener('submit', handleCardAddFormSubmit);
 
 // // @todo: Темплейт карточки
 // const cardTemplate = document.querySelector('#card-template').content;

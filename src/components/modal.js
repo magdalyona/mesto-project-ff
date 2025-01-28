@@ -22,8 +22,8 @@ function closeModal(popup) {
 
 function closedOverlay(evt) {
 
-    if(evt.tatget === evt.currentTarget) {
-        closeModal(evt.tatget)
+    if(evt.target === evt.currentTarget) {
+        closeModal(evt.target)
     }
 };
 
