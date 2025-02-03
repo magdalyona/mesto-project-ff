@@ -1,35 +1,4 @@
-// открытие модального окна
-
-function openModal(popup) {
-
-    popup.classList.add('popup_is-opened');
-    popup.addEventListener('click', closedOverlay);
-    document.addEventListener('keydown', closedEsc);    
-
-}
-
-// закрытие модального окна
-
-function closeModal(popup) {
-
-    popup.classList.remove('popup_is-opened');
-    popup.removeEventListener('click', closedOverlay);
-    document.removeEventListener('keydown', closedEsc);   
-
-}
-
-// закрытие попапа кликом оверлей
-
-function closedOverlay(evt) {
-
-    if(evt.target === evt.currentTarget) {
-        closeModal(evt.target)
-    }
-};
-
-
 // закрытие нажатие на картинку esc
-
 function closedEsc(evt) {
 
     if (evt.key === 'Escape') {
@@ -40,5 +9,30 @@ function closedEsc(evt) {
     }
 }
 
+// открытие модального окна
+function openModal(popup) {
 
-export { openModal, closeModal };
+    popup.classList.add('popup_is-opened');
+    popup.addEventListener('click', closedOverlay);
+    document.addEventListener('keydown', closedEsc);    
+
+}
+
+// закрытие модального окна
+function closeModal(popup) {
+
+    popup.classList.remove('popup_is-opened');
+    popup.removeEventListener('click', closedOverlay);
+    document.removeEventListener('keydown', closedEsc);   
+
+}
+
+// закрытие попапа кликом оверлей
+function closedOverlay(evt) {
+
+    if(evt.target === evt.currentTarget) {
+        closeModal(evt.target)
+    }
+};
+
+export { openModal, closeModal, closedOverlay };
