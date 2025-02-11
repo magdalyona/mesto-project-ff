@@ -1,25 +1,19 @@
 
 // @todo: Функция создания карточки
-function createCard(elementCards, deleteClick, likeClick, imageClick, userId) {
+function createCard(elementCards, deleteClick, likeClick, imageClick, userId) {   
 
-    const template = document.querySelector('#card-template');
+    const template = document.querySelector('#card-template').content;
 
     if (!template) {
         console.error('Template not found!');
         return null; // или выбросить ошибку
       }
+    // const item = template.content.cloneNode(true);
+    // const cardElement = item.querySelector('.card');
 
-    const item = template.content.cloneNode(true);
-    const cardElement = item.querySelector('.card');
-
-    const cardTitle = item.querySelector('.card__title');
-    const cardImage = item.querySelector('.card__image');
-
-    cardImage.setAttribute("src", elementCards.link);
-    // тект на картинке
-    cardImage.setAttribute("alt", elementCards.name);
-    // назвение карточки
-    cardTitle.textContent = elementCards.name;
+    const cardElement = template.querySelector('.card').cloneNode(true);
+    const cardTitle = cardElement.querySelector('.card__title');
+    const cardImage = cardElement.querySelector('.card__image');
 
     const deleteButton = cardElement.querySelector('.card__delete-button');
     
@@ -27,12 +21,19 @@ function createCard(elementCards, deleteClick, likeClick, imageClick, userId) {
     
     const cardLikeCount = cardElement.querySelector('.card__like-count');
 
+    cardImage.setAttribute("src", elementCards.link);
+    // тект на картинке
+    cardImage.setAttribute("alt", elementCards.name);
+    // назвение карточки
+    cardTitle.textContent = elementCards.name;
+
     
     if (elementCards.owner._id !== userId) {
         deleteButton.remove();
     } else {
         deleteButton.addEventListener('click', () => 
-        deleteClick(cardElement, elementCards._id));
+        deleteClick(cardElement, elementCards._id)
+    );
     }
     
     if (elementCards.likes.some((ures) => ures._id === userId)) {
@@ -47,7 +48,7 @@ function createCard(elementCards, deleteClick, likeClick, imageClick, userId) {
     };
 
     cardImage.addEventListener('click', () => imageClick(elementCards));
-    cardLikeButton.addEventListener('click', () => likeClick(elementCards._id, cardLikeButton));
+    cardLikeButton.addEventListener('click', () => likeClick(elementCards._id , cardLikeButton));
 
     return cardElement;
 }
