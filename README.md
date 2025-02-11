@@ -1,6 +1,6 @@
 # Проектная работа Mesto
 
-https://magdalyona.github.io/mesto-project сайт
+https://magdalyona.github.io/mesto-project-ff/ сайт
 
 
 работа с 
