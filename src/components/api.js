@@ -23,7 +23,7 @@ export function getInitialCards() {
   }
 
 // изменнеие аватара
-export function userAvatar(avatar)  {
+export function updateUserAvatar(avatar)  {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: config.headers,
@@ -67,9 +67,9 @@ export function deleteCardMy(cardId) {
   }
 
 // добалвение лайка
-export function putLike(cardId, method) {
+export function putLike(cardId) {
     return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-      method: method,
+      method: "PUT",
       headers: config.headers,
     }).then(checkResponse);
   }

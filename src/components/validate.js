@@ -62,10 +62,17 @@ function enableValidation(config) {
 
 // Очистка ошибок валидации
 function clearValidation(formElement, config) {
+
     const inputElements = formElement.querySelectorAll(config.inputSelector);
+
     inputElements.forEach((inputElement) => {
         hideInputError(formElement, inputElement, config);
     });
+
+    const submitButton = formElement.querySelector(config.submitButtonSelector);
+    submitButton.classList.remove(config.inactiveButtonClass);
+    submitButton.disabled = true;
+
 }
 
 export { enableValidation, clearValidation, toggleButtonState };

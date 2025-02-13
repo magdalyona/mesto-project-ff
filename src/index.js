@@ -5,7 +5,7 @@ import { openModal, closeModal, closedOverlay } from './components/modal.js'; //
 import { initialCards } from './components/cards.js'; // добавьте импорт главного файла стилей
 
 import { enableValidation, clearValidation, toggleButtonState } from './components/validate.js';
-import { getInitialCards, getUserInfo, patchUserInfo, postNewCard, putLike, deleteCardMy, userAvatar } from './components/api.js';
+import { getInitialCards, getUserInfo, patchUserInfo, postNewCard, putLike, deleteCardMy, updateUserAvatar } from './components/api.js';
 
 // Сохраняем ссылки на важные элементы DOM для оптимизации
 const listElement = document.querySelector('.places__list');
@@ -61,7 +61,7 @@ function handleAvatarFormSubmit(evt, inputAvatar, popupAvatar, profileAvatar) {
     const submitButton = evt.submitter;
     renderLoading(true, submitButton);
 
-    userAvatar(inputAvatar.value)
+    updateUserAvatar(inputAvatar.value)
         .then((userData) => {
             profileAvatar.style.backgroundImage = `url(${userData.avatar})`;
             closeModal(popupAvatar);
