@@ -9,10 +9,16 @@ function toggleButtonState(formElement, config) {
         submitButton.disabled = false;
         submitButton.classList.remove(config.inactiveButtonClass);
     } else {
-        submitButton.disabled = true;
-        submitButton.classList.add(config.inactiveButtonClass);
+        disableSubmitButton(submitButton, config); 
     }
 }
+
+// Отключить кнопку отправки формы
+const disableSubmitButton = (submitButton, config) => {
+    submitButton.disabled = true;
+    submitButton.classList.add(config.inactiveButtonClass);
+};
+
 
 // Показать сообщение об ошибке
 function showInputError(formElement, inputElement, config) {
@@ -70,8 +76,7 @@ function clearValidation(formElement, config) {
     });
 
     const submitButton = formElement.querySelector(config.submitButtonSelector);
-    submitButton.classList.remove(config.inactiveButtonClass);
-    submitButton.disabled = true;
+    disableSubmitButton(submitButton, config);
 
 }
 

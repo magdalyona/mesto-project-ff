@@ -82,10 +82,8 @@ function deleteClick(cardElement, cardId) {
 
 //обработка клика 
 function likeClick(cardId, likeButton) {
-    const method = likeButton.classList.contains('card__like-button_is-active')
-        ? 'DELETE'
-        : 'PUT';
-    putLike(cardId, method)
+    const isLiked = !likeButton.classList.contains('card__like-button_is-active');
+        putLike(cardId, isLiked)
         .then((data) => {
             likeButton.classList.toggle('card__like-button_is-active');
             const cardLikeCount = likeButton

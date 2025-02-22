@@ -67,13 +67,10 @@ export function deleteCardMy(cardId) {
   }
 
 // добалвение лайка
-export function putLike(cardId) {
-    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-      method: "PUT",
+export function putLike(cardId, isLiked) {
+ return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+      method: isLiked ? "PUT" : "DELETE",
       headers: config.headers,
     }).then(checkResponse);
   }
 
-
-
- 
